@@ -12,7 +12,7 @@ xi_keys = np.array([10*i for i in range(1, 10)])
 mt_read = []
 for mt in mt_keys:
     mt_read.append((mt, xi))
-pool = ProcessPoolExecutor(max_worker=8)
+pool = ProcessPoolExecutor(max_workers=8)
 results_read = list(pool.map(Reader_parallel, mt_read))
 
 for mt, Tup in zip(mt_keys, results_read):
