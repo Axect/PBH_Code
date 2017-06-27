@@ -236,7 +236,7 @@ cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
 #--------------Saving-----------------------------------
 #-------------------------------------------------------
 cpdef Saver(double mt, int xi, tuple List): # Save Data
-    cdef object wrt_temp = open(str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
+    cdef object wrt_temp = open('../PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
     cdef int i, k
     cdef double elem
     cdef np.ndarray[dtype=double, ndim=1] obj
@@ -254,7 +254,7 @@ cpdef Saver_parallel(tuple Tup): # Save Data
     cdef double mt=Tup[0]
     cdef int xi=Tup[1]
     cdef tuple List = Tup[2]
-    cdef object wrt_temp = open(str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
+    cdef object wrt_temp = open('../PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
     cdef int i, k
     cdef double elem
     cdef np.ndarray[dtype=double, ndim=1] obj
