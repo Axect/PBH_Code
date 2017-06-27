@@ -197,7 +197,7 @@ cpdef tuple Reader(double mt, int xi): # Now consider only int xi
     cdef object in_temp, line, obj, elem
     cdef list TP
     cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G
-    in_temp = open(str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
+    in_temp = open('../PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
     TP = [line.split(',') for line in in_temp]
     for obj in TP:
         del(obj[len(obj)-1])
@@ -218,7 +218,7 @@ cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
     cdef object in_temp, line, obj, elem
     cdef list TP
     cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G, BlH
-    in_temp = open(str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
+    in_temp = open('../PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
     TP = [line.split(',') for line in in_temp]
     for obj in TP:
         del(obj[len(obj)-1])
