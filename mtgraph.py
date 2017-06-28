@@ -32,6 +32,7 @@ for mt, Tup in zip(Mt_keys, results_read):
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
+plt.figure(figsize=(10,6), dpi=300)
 for mt in Mt_keys:
     plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['lH_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
@@ -41,6 +42,7 @@ plt.axis([32, 38, 0.0000, 0.0007])
 plt.legend(fontsize=12)
 plt.savefig("../PBH_Fig/lH_Mt_170_8_.png", dpi=300)
 
+plt.figure(figsize=(10,6), dpi=300)
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g1_'+str(mt)+'_'+str(xi)], label=r'$g_1$')
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g2_'+str(mt)+'_'+str(xi)], label=r'$g_2$')
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g3_'+str(mt)+'_'+str(xi)], label=r'$g_3$')
@@ -51,6 +53,7 @@ plt.ylabel(r'Gauge Couplings', fontsize=14)
 plt.legend(fontsize=14)
 plt.savefig("../PBH_Fig/ga_Mt_170_88.png", dpi=300)
 
+plt.figure(figsize=(10,6), dpi=300)
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['G_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
 plt.xlabel(r'$t=\ln(\mu/M_t)$', fontsize=14)
@@ -63,6 +66,7 @@ for mt in Mt_keys:
     locals()['Rphi_'+str(mt)+'_'+str(xi)] = Normalize(locals()['phi_'+str(mt)+'_'+str(xi)],1)
     locals()['RV_'+str(mt)+'_'+str(xi)] = Normalize(locals()['V_'+str(mt)+'_'+str(xi)],4)
 
+plt.figure(figsize=(10,6), dpi=300)
 for mt in Mt_keys:
     plt.plot(locals()['Rphi_'+str(mt)+'_'+str(xi)], locals()['RV_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
