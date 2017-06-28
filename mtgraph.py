@@ -2,9 +2,9 @@ from PBH import *
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 import matplotlib
+matplotlib.use('Agg')
 import pylab as plt
 import seaborn as sns
-matplotlib.use('Agg')
 
 mt = 170.88
 xi = 100
