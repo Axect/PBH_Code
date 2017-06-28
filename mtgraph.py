@@ -55,7 +55,7 @@ plt.xlabel(r'$t=\ln(\mu/M_t)$', fontsize=14)
 plt.ylabel(r'$G(t)$', fontsize=14)
 plt.legend(fontsize=12)
 #plt.axis([0,2.4, 0, 2.5*10**(-8)])
-plt.savefig("../PBH_Fig/G_Mt_170_88.png"), dpi=300
+plt.savefig("../PBH_Fig/G_Mt_170_88.png", dpi=300)
 
 for mt in Mt_keys:
     locals()['Rphi_'+str(mt)+'_'+str(xi)] = Normalize(locals()['phi_'+str(mt)+'_'+str(xi)],1)
