@@ -7,7 +7,6 @@ import seaborn as sns
 mt = 170.88
 xi = 100
 mt_keys = [(170, 0.8 + 0.01*i, 2) for i in range(10)]
-xi_keys = np.array([10*i for i in range(1, 10)])
 Mt_keys = [Mt[0]+Mt[1] for Mt in mt_keys]
 
 mt_read = []
@@ -31,18 +30,15 @@ for Mt, Tup in zip(Mt_keys, results_read):
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-plt.figure(figsize=(10,6), dpi=300)
 for mt in Mt_keys:
-    for xi in xi_keys:
-        plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['lH_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
+    plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['lH_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
 plt.xlabel(r'$t=\log(\mu/M_t)$', fontsize=14)
 plt.ylabel(r'$\lambda$', fontsize=14)
 plt.axis([32, 38, 0.0000, 0.0007])
 plt.legend(fontsize=12)
-plt.savefig("../PBH_Fig/lH_Mt_170_8_.png")
+plt.savefig("../PBH_Fig/lH_Mt_170_8_.png", dpi=300)
 
-plt.figure(figsize=(10,6), dpi=300)
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g1_'+str(mt)+'_'+str(xi)], label=r'$g_1$')
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g2_'+str(mt)+'_'+str(xi)], label=r'$g_2$')
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['g3_'+str(mt)+'_'+str(xi)], label=r'$g_3$')
@@ -51,23 +47,20 @@ plt.title(r'$M_t =170.89GeV,\,\xi='+str(xi)+'$', fontsize=16)
 plt.xlabel(r'$t=\log(\mu/M_t)$', fontsize=14)
 plt.ylabel(r'Gauge Couplings', fontsize=14)
 plt.legend(fontsize=14)
-plt.savefig("../PBH_Fig/ga_Mt_170_88.png")
+plt.savefig("../PBH_Fig/ga_Mt_170_88.png", dpi=300)
 
-plt.figure(figsize=(10,6), dpi=300)
 plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['G_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
 plt.xlabel(r'$t=\ln(\mu/M_t)$', fontsize=14)
 plt.ylabel(r'$G(t)$', fontsize=14)
 plt.legend(fontsize=12)
 #plt.axis([0,2.4, 0, 2.5*10**(-8)])
-plt.savefig("../PBH_Fig/G_Mt_170_88.png")
+plt.savefig("../PBH_Fig/G_Mt_170_88.png"), dpi=300
 
 for mt in Mt_keys:
-    for xi in xi_keys:
-        locals()['Rphi_'+str(mt)+'_'+str(xi)] = Normalize(locals()['phi_'+str(mt)+'_'+str(xi)],1)
-        locals()['RV_'+str(mt)+'_'+str(xi)] = Normalize(locals()['V_'+str(mt)+'_'+str(xi)],4)
+    locals()['Rphi_'+str(mt)+'_'+str(xi)] = Normalize(locals()['phi_'+str(mt)+'_'+str(xi)],1)
+    locals()['RV_'+str(mt)+'_'+str(xi)] = Normalize(locals()['V_'+str(mt)+'_'+str(xi)],4)
 
-plt.figure(figsize=(10,6), dpi=300)
 for mt in Mt_keys:
     plt.plot(locals()['Rphi_'+str(mt)+'_'+str(xi)], locals()['RV_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
@@ -75,4 +68,4 @@ plt.xlabel(r'$\phi$ (in units of $M_p$)', fontsize=14)
 plt.ylabel(r'$V_{eff}$ (in units of $M_p^4$)', fontsize=14)
 plt.legend(fontsize=12)
 plt.axis([0,25, -1*10**(-7), 1*10**(-6)])
-plt.savefig("../PBH_Fig/V_Mt_170_8_.png")
+plt.savefig("../PBH_Fig/V_Mt_170_8_.png", dpi=300)
