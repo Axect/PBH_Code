@@ -163,7 +163,7 @@ cpdef tuple RCC_intxi(double Mt, int xi, int Nend, double h): # M_t, xi, End poi
 #Parallelize
 cpdef tuple RCC_parallel(tuple Tup): # M_t, xi, End point, precision
     cdef double h=Tup[3]
-    cdef np.ndarray[dtype=object, ndim=1] mt=Tup[0]
+    cdef tuple mt=Tup[0]
     cdef int xi=Tup[1], Nend=Tup[2], mt_int=mt[0]
     cdef double mt_dec=mt[1]
     cdef double Mt=mt_int+mt_dec
@@ -216,7 +216,7 @@ cpdef tuple Reader(double mt, int xi): # Now consider only int xi
 
 # Parallelize
 cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
-    cdef np.ndarray[dtype=object, ndim=1] mt=Tup[0]
+    cdef tuple mt=Tup[0]
     cdef int xi=Tup[1], mt_int=mt[0], mt_l=mt[2]
     cdef double mt_dec=mt[1]
     cdef int mt_idec=int(mt_dec*10**(mt_l))
@@ -256,7 +256,7 @@ cpdef Saver(double mt, int xi, tuple List): # Save Data
 
 # Parallelize
 cpdef Saver_parallel(tuple Tup): # Save Data
-    cdef np.ndarray[dtype=object, ndim=1] mt=Tup[0]
+    cdef tuple mt=Tup[0]
     cdef int xi=Tup[1], mt_int=mt[0], mt_l=mt[2]
     cdef double mt_dec=mt[1]
     cdef int mt_idec=int(mt_dec*10**(mt_l))
