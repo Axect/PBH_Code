@@ -101,7 +101,7 @@ cdef class RGE:
         self.g2 += h * self.Beta_real[2]
         self.g3 += h * self.Beta_real[3]
         self.yt += h * self.Beta_real[4]
-        self.LG += h * self.Beta_real[5]
+        self.LG -= h * self.Beta_real[5]
         self.t += h
 #-------------------------------------------------------
 #--------------Running----------------------------------
@@ -189,7 +189,7 @@ cpdef tuple RCC_parallel(tuple Tup): # M_t, xi, End point, precision
         yt[i] = A.yt
         t[i] = A.t
         phi[i] = A.phi
-        G[i] = exp(-A.LG)
+        G[i] = A.LG
         BlH[i] = A.Beta[0]
         A.Running(h)
     return (lH, g1, g2, g3, yt, t, phi, G, BlH)
