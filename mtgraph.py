@@ -8,6 +8,7 @@ mt = 170.88
 xi = 100
 mt_keys = [(170, 0.8 + 0.01*i, 2) for i in range(10)]
 xi_keys = np.array([10*i for i in range(1, 10)])
+Mt_keys = [Mt[0]+Mt[1] for Mt in mt_keys]
 
 mt_read = []
 for mt in mt_keys:
@@ -15,7 +16,7 @@ for mt in mt_keys:
 pool = ProcessPoolExecutor(max_workers=8)
 results_read = list(pool.map(Reader_parallel, mt_read))
 
-for mt, Tup in zip(mt_keys, results_read):
+for Mt, Tup in zip(Mt_keys, results_read):
     locals()['lH_'+str(mt)+'_'+str(xi)] = Tup[0]
     locals()['g1_'+str(mt)+'_'+str(xi)] = Tup[1]
     locals()['g2_'+str(mt)+'_'+str(xi)] = Tup[2]
@@ -31,7 +32,7 @@ plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
 plt.figure(figsize=(10,6), dpi=300)
-for mt in mt_keys:
+for mt in Mt_keys:
     for xi in xi_keys:
         plt.plot(locals()['t_'+str(mt)+'_'+str(xi)], locals()['lH_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
@@ -61,13 +62,13 @@ plt.legend(fontsize=12)
 #plt.axis([0,2.4, 0, 2.5*10**(-8)])
 plt.savefig("../PBH_Fig/G_Mt_170_88.png")
 
-for mt in mt_keys:
+for mt in Mt_keys:
     for xi in xi_keys:
         locals()['Rphi_'+str(mt)+'_'+str(xi)] = Normalize(locals()['phi_'+str(mt)+'_'+str(xi)],1)
         locals()['RV_'+str(mt)+'_'+str(xi)] = Normalize(locals()['V_'+str(mt)+'_'+str(xi)],4)
 
 plt.figure(figsize=(10,6), dpi=300)
-for mt in mt_keys:
+for mt in Mt_keys:
     plt.plot(locals()['Rphi_'+str(mt)+'_'+str(xi)], locals()['RV_'+str(mt)+'_'+str(xi)], label=r'$M_t='+str(mt)+'$')
 plt.title(r'$\xi='+str(xi)+'$', fontsize=16)
 plt.xlabel(r'$\phi$ (in units of $M_p$)', fontsize=14)
