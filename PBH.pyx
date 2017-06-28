@@ -162,8 +162,11 @@ cpdef tuple RCC_intxi(double Mt, int xi, int Nend, double h): # M_t, xi, End poi
 
 #Parallelize
 cpdef tuple RCC_parallel(tuple Tup): # M_t, xi, End point, precision
-    cdef double Mt=Tup[0], h=Tup[3]
-    cdef int xi=Tup[1], Nend=Tup[2]
+    cdef double h=Tup[3]
+    cdef np.ndarray[dtype=int, ndim=1] mt=Tup[0]
+    cdef int xi=Tup[1], Nend=Tup[2], mt_int=mt[0], mt_l=len(str(mt[1]))
+    cdef double mt_dec=mt[1]/(10**(mt_l))
+    cdef double Mt=mt_int+mt_dec
     # Real Running
     cdef object A = RGE(Mt, xi, 0)
     cdef int i, k = int(1/h * Nend)
@@ -213,12 +216,12 @@ cpdef tuple Reader(double mt, int xi): # Now consider only int xi
 
 # Parallelize
 cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
-    cdef double mt=Tup[0]
-    cdef int xi=Tup[1]
+    cdef np.ndarray[dtype=int, ndim=1] mt=Tup[0]
+    cdef int xi=Tup[1], mt_int=mt[0], mt_dec=mt[1]
     cdef object in_temp, line, obj, elem
     cdef list TP
     cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G, BlH
-    in_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
+    in_temp = open('~/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_dec)+'_'+str(xi)+'_lamb.csv', 'r')
     TP = [line.split(',') for line in in_temp]
     for obj in TP:
         del(obj[len(obj)-1])
@@ -236,7 +239,7 @@ cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
 #--------------Saving-----------------------------------
 #-------------------------------------------------------
 cpdef Saver(double mt, int xi, tuple List): # Save Data
-    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
+    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str+'_'+str(xi)+'_lamb.csv', 'w')
     cdef int i, k
     cdef double elem
     cdef np.ndarray[dtype=double, ndim=1] obj
@@ -251,10 +254,10 @@ cpdef Saver(double mt, int xi, tuple List): # Save Data
 
 # Parallelize
 cpdef Saver_parallel(tuple Tup): # Save Data
-    cdef double mt=Tup[0]
-    cdef int xi=Tup[1]
+    cdef np.ndarray[dtype=int, ndim=1] mt=Tup[0]
+    cdef int xi=Tup[1], mt_int=mt[0], mt_dec=mt[1]
     cdef tuple List = Tup[2]
-    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'w')
+    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_dec)+'_'+str(xi)+'_lamb.csv', 'w')
     cdef int i, k
     cdef double elem
     cdef np.ndarray[dtype=double, ndim=1] obj
