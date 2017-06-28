@@ -15,7 +15,7 @@ for mt in mt_keys:
 pool = ProcessPoolExecutor(max_workers=8)
 results_read = list(pool.map(Reader_parallel, mt_read))
 
-for Mt, Tup in zip(Mt_keys, results_read):
+for mt, Tup in zip(Mt_keys, results_read):
     locals()['lH_'+str(mt)+'_'+str(xi)] = Tup[0]
     locals()['g1_'+str(mt)+'_'+str(xi)] = Tup[1]
     locals()['g2_'+str(mt)+'_'+str(xi)] = Tup[2]
