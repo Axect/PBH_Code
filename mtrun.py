@@ -3,7 +3,7 @@ from concurrent.futures import ProcessPoolExecutor
 
 mt = 170.85
 xi = 100
-mt_keys = [np.array([170, 80 + i, 2]) for i in range(10)]
+mt_keys = [np.array([170, 0.8 + 0.01*i, 2]) for i in range(10)]
 xi_keys = np.array([10*i for i in range(1, 10)])
 
 mt_run = []

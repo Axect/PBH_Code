@@ -256,7 +256,7 @@ cpdef Saver(double mt, int xi, tuple List): # Save Data
 
 # Parallelize
 cpdef Saver_parallel(tuple Tup): # Save Data
-    cdef np.ndarray[dtype=double, ndim=1] mt=Tup[0]
+    cdef np.ndarray[dtype=int, ndim=1] mt=Tup[0]
     cdef int xi=Tup[1], mt_int=int(mt[0]), mt_l=mt[2]
     cdef double mt_dec=mt[1]
     cdef int mt_idec=int(mt_dec*10**(mt_l))
