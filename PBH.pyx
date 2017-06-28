@@ -223,7 +223,7 @@ cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
     cdef object in_temp, line, obj, elem
     cdef list TP
     cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G, BlH
-    in_temp = open('~/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_idec)+'_'+str(xi)+'_lamb.csv', 'r')
+    in_temp = open('/home/rakhan/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_idec)+'_'+str(xi)+'_lamb.csv', 'r')
     TP = [line.split(',') for line in in_temp]
     for obj in TP:
         del(obj[len(obj)-1])
@@ -261,7 +261,7 @@ cpdef Saver_parallel(tuple Tup): # Save Data
     cdef double mt_dec=mt[1]
     cdef int mt_idec=int(mt_dec*10**(mt_l))
     cdef tuple List = Tup[2]
-    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_idec)+'_'+str(xi)+'_lamb.csv', 'w')
+    cdef object wrt_temp = open('/home/rakhan/Documents/PBH/PBH_Data/'+str(mt_int)+'_'+str(mt_idec)+'_'+str(xi)+'_lamb.csv', 'w')
     cdef int i, k
     cdef double elem
     cdef np.ndarray[dtype=double, ndim=1] obj
