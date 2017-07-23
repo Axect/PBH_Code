@@ -106,60 +106,6 @@ cdef class RGE:
 #-------------------------------------------------------
 #--------------Running----------------------------------
 #-------------------------------------------------------
-cpdef tuple RCC(double Mt, double xi, int Nend, double h): # M_t, xi, End point, precision
-    # Real Running
-    cdef int i, k
-    A = RGE(Mt, xi, 0)
-    k = int(1/h * Nend)
-    cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G
-    lH = np.empty(k)
-    yt = np.empty(k)
-    t = np.empty(k)
-    g1 = np.empty(k)
-    g2 = np.empty(k)
-    g3 = np.empty(k)
-    phi = np.empty(k)
-    G = np.empty(k)
-    for i in range(k):
-        A.BETA() # initialize by calling BETA
-        lH[i] = A.lH
-        g1[i] = A.g1
-        g2[i] = A.g2
-        g3[i] = A.g3
-        yt[i] = A.yt
-        t[i] = A.t
-        phi[i] = A.phi
-        G[i] = exp(-A.LG)
-        A.Running(h)
-    return (lH, g1, g2, g3, yt, t, phi, G)
-
-# More Faster
-cpdef tuple RCC_intxi(double Mt, int xi, int Nend, double h): # M_t, xi, End point, precision
-    # Real Running
-    cdef object A = RGE(Mt, xi, 0)
-    cdef int i, k = int(1/h * Nend)
-    cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G
-    lH = np.empty(k)
-    yt = np.empty(k)
-    t = np.empty(k)
-    g1 = np.empty(k)
-    g2 = np.empty(k)
-    g3 = np.empty(k)
-    phi = np.empty(k)
-    G = np.empty(k)
-    for i in range(k):
-        A.BETA() # initialize by calling BETA
-        lH[i] = A.lH
-        g1[i] = A.g1
-        g2[i] = A.g2
-        g3[i] = A.g3
-        yt[i] = A.yt
-        t[i] = A.t
-        phi[i] = A.phi
-        G[i] = exp(-A.LG)
-        A.Running(h)
-    return (lH, g1, g2, g3, yt, t, phi, G)
-
 #Parallelize
 cpdef tuple RCC_parallel(tuple Tup): # M_t, xi, End point, precision
     cdef double h=Tup[3]
@@ -196,24 +142,6 @@ cpdef tuple RCC_parallel(tuple Tup): # M_t, xi, End point, precision
 #-------------------------------------------------------
 #--------------Reading----------------------------------
 #-------------------------------------------------------
-cpdef tuple Reader(double mt, int xi): # Now consider only int xi
-    cdef object in_temp, line, obj, elem
-    cdef list TP
-    cdef np.ndarray[dtype=double, ndim=1] lH, yt, t, g1, g2, g3, phi, G
-    in_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str(xi)+'_lamb.csv', 'r')
-    TP = [line.split(',') for line in in_temp]
-    for obj in TP:
-        del(obj[len(obj)-1])
-    lH = np.array([float(elem) for elem in TP[0]])
-    g1 = np.array([float(elem) for elem in TP[1]])
-    g2 = np.array([float(elem) for elem in TP[2]])
-    g3 = np.array([float(elem) for elem in TP[3]])
-    yt = np.array([float(elem) for elem in TP[4]])
-    t = np.array([float(elem) for elem in TP[5]])
-    phi = np.array([float(elem) for elem in TP[6]])
-    G = np.array([float(elem) for elem in TP[7]])
-    return (lH, g1, g2, g3, yt, t, phi, G)
-
 # Parallelize
 cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
     cdef tuple mt=Tup[0]
@@ -240,20 +168,6 @@ cpdef tuple Reader_parallel(tuple Tup): # Now consider only int xi
 #-------------------------------------------------------
 #--------------Saving-----------------------------------
 #-------------------------------------------------------
-cpdef Saver(double mt, int xi, tuple List): # Save Data
-    cdef object wrt_temp = open('~/Documents/PBH/PBH_Data/'+str(mt)+'_'+str+'_'+str(xi)+'_lamb.csv', 'w')
-    cdef int i, k
-    cdef double elem
-    cdef np.ndarray[dtype=double, ndim=1] obj
-    for k, obj in enumerate(List):
-        for i, elem in enumerate(obj):
-            if i < len(obj):
-                wrt_temp.write(str(elem)+',')
-            else:
-                wrt_temp.write(str(elem))
-        wrt_temp.write('\n')
-    wrt_temp.close()
-
 # Parallelize
 cpdef Saver_parallel(tuple Tup): # Save Data
     cdef tuple mt=Tup[0]
